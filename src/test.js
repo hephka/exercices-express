@@ -99,3 +99,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
 })
 console.log(app) */
+
+import express from 'express'
+
+const app = express()
+console.log(app)
