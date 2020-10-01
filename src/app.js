@@ -65,9 +65,27 @@ app.get('/aboutyou', (req, res) => {
 })
 
 app.get('/vote/:userAge', (req, res) => {
-    if (req.params.userAge >= countryMajority.france) {
-        res.send('Félicitation tu vas pouvoir voter!')
-    } else res.send(`Désolé tu n'es pas majeur(e)... Reviens dans ${countryMajority.france - req.params.userAge} an(s).`)
+    if (isNaN(req.params.userAge)) {
+        res.send(`Error: ${req.params.userAge} is not a number`)
+      }
+    else if (req.params.userAge >= countryMajority.france) {
+        res.send(title + 'Félicitation tu vas pouvoir voter!')
+    } else res.send(title + `Désolé tu n'es pas majeur(e)... Reviens dans ${countryMajority.france - req.params.userAge} an(s).`)
+})
+
+app.get('/palindrome/:el', (req, res) => {
+    if (req.params.el === req.params.el.split('').reverse().join('')) {
+        res.send(title + `${req.params.el} est un palindrome`)
+      } else {
+        res.send(title + `${req.params.el} n'est pas un palindrome`)
+      }
+})
+
+app.get('/oddtest/:nb', (req, res) => {
+    if (isNaN(req.params.nb)) {
+        res.send(`Error: ${req.params.nb} is not a number`)
+      }
+    res.send(req.params.nb % 2 === 0 ? `${req.params.nb} est pair` : `${req.params.nb} est impair`)
 })
  
 app.listen(PORT, () => {
