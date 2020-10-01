@@ -32,8 +32,15 @@ si age >= 18, par example http://localhost:7777/age/19, on devra retrouver 'Vous
 Ajouter une route /palindromequi prendra un mot en paramètre. Un message devra être retourné à l'utilisateur si le mot est un palindrome. 
 => http://localhost:7777/palindrome/[*]
 
-Ajouter une route /oddtest qui prendra un nombre en paramètre. Un message devra être retourné pour indiquer que le nombre passé en paramètre est pair ou impair
 
+
+Ajouter une route /oddtest qui prendra un nombre en paramètre. Un message devra être retourné pour indiquer que le nombre passé en paramètre est pair ou impair
 si le nombre est pair, par example http://localhost:7777/oddtest/2, on devra retourner 'pair'
 si le nombre est impair, par example http://localhost:7777/oddtest/19, on devra retrouver 'impair'
 => localhost:7777/oddtest/[Number]
+
+
+
+Usage : node testServer.js /*Il faut que le serveur app.js soit On*/
+
+Ecrivez un script testServer.js qui se connectera aux différentes url de votre serveur et qui affichera dans la console les messages récupérés. testServer.js utilisera le package axios pour éffectuer les requêtes HTTP sur votre serveur express
