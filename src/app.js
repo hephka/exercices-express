@@ -38,11 +38,11 @@ const main_aboutme = `
 <p>Si tu te demandes pourquoi je ne parle pas du back end tu verras dans mon code que je ne suis pas encore au point... ;-)</p>
 </main>
 `
+const countryMajority = {
+    france: 18,
+    usa: 21
+}
 
-/* Créer une programme app.js qui utilise express. Cette application devra tourner sur localhost 
-et le port 7777. Avec votre navigateur en se connectant sur http://localhost:7777 on devra
-récupérer le message 'Exercices express partie 1' Pour cela il faudra créer une route qui
-manage le path / */
 
 const app = express()
 
@@ -50,10 +50,26 @@ app.get('/', (req, res) => {
     res.send(title)
 })
 
-app.get('/aboutme', (req, res1) => {
-    res1.send(title + main_aboutme)
+app.get('/aboutme', (req, res) => {
+    res.send(title + main_aboutme)
 })
 
+app.get('/aboutyou', (req, res) => {
+    res.send(title + `
+    <main style='font-size: 1.5rem; margin-top: 5rem'>
+    <p>Quoi que j'ai quand même appris quelques bases, laisse moi te montrer de quoi je suis capable...</p>
+    <p>Pour commencer je te présente ton adresse IP : ${req.ip}
+    </br>Et voici la version de ton <i lang ='en'>browser</i> : ${req.headers['user-agent']}</p>
+    </main>
+    `)
+})
+
+app.get('/vote/:userAge', (req, res) => {
+    if (req.params.userAge >= countryMajority.france) {
+        res.send('Félicitation tu vas pouvoir voter!')
+    } else res.send(`Désolé tu n'es pas majeur(e)... Reviens dans ${countryMajority.france - req.params.userAge} an(s).`)
+})
+ 
 app.listen(PORT, () => {
     console.log(`Exercice `+chalk.bgBlue(`express`)+` listening at `+chalk.green(`http://localhost:${PORT}`))
 })
